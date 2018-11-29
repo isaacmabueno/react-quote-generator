@@ -1,3 +1,14 @@
+.quote-result {
+  cursor: pointer;
+  border: none;
+  background: #0084b4;
+  color: #fff !important;
+  font-family: "Roboto";
+  font-size: 14px;
+  border-radius: 3px;
+  padding: 10px;
+}
+
 .App {
   text-align: center;
   margin: 0 auto;

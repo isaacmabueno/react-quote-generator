@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import { Button } from 'react-bootstrap';
-
 class QuoteMachine extends Component {
 
     constructor() {
@@ -38,17 +37,38 @@ class QuoteMachine extends Component {
         })
     }
 
+    renderQuote = () => {
+        const { title, content, link } = this.state.quote;
+        return (
+            <Fragment>
+                <div>
+                    <h1>{title}</h1>
+                    {content}
+                    <br/>
+                    <button className="quote-result" onClick={() => this.shareOnTwitter(title, link)}> Share on Twitter</button>
+                    <hr/>
+                </div>
+            </Fragment>
+        )
+    }
+
+    shareOnTwitter = (text, url) => {
+        window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+    }
+
     render() {
-        const { hasQuote, quote } = this.state;
+        const { hasQuote } = this.state;
         // console.log(this.state);
         return (
             <Fragment>
-                <div>QuoteMachine</div>
-                <Button onClick={this.getRandomQuote}>
+                <h1>QuoteMachine</h1>
+                <button onClick={this.getRandomQuote}>
                 Push Me!
-                </Button>
+                </button>
                 <br/>
-                {hasQuote === true ? JSON.stringify(quote) : 'no quote yet'}
+                {hasQuote === true ?
+                    this.renderQuote()
+                    : 'no quote yet'}
             </Fragment>
         )
     }
